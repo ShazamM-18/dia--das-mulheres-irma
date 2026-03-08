@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Para minha irmã 🎨</title>
+
+<style>
+
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+flex-direction:column;
+color:#333;
+text-align:center;
+}
+
+#inicio{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:#7b2cbf;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+#app{
+display:none;
+flex-direction:column;
+align-items:center;
+}
+
+canvas{
+background:white;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+#cores{
+margin-top:15px;
+}
+
+.cor{
+width:30px;
+height:30px;
+border-radius:50%;
+display:inline-block;
+margin:5px;
+cursor:pointer;
+border:2px solid white;
+}
+
+#mensagem{
+display:none;
+margin-top:25px;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+max-width:400px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="inicio">
+<h1>🎨 Uma surpresa para você</h1>
+<p>Preparei algo diferente.</p>
+<button onclick="iniciar()">Começar a pintar</button>
+</div>
+
+<div id="app">
+
+<h2>Pinte a tela 🎨</h2>
+
+<canvas id="tela" width="320" height="320"></canvas>
+
+<div id="cores">
+<div class="cor" style="background:#ff595e" onclick="mudarCor('#ff595e')"></div>
+<div class="cor" style="background:#ffca3a" onclick="mudarCor('#ffca3a')"></div>
+<div class="cor" style="background:#8ac926" onclick="mudarCor('#8ac926')"></div>
+<div class="cor" style="background:#1982c4" onclick="mudarCor('#1982c4')"></div>
+<div class="cor" style="background:#6a4c93" onclick="mudarCor('#6a4c93')"></div>
+</div>
+
+<div id="mensagem">
+
+<h3>Feliz Dia das Mulheres 🌸</h3>
+
+<p>
+Quis fazer algo diferente para você.<br><br>
+
+Crescemos juntos e é muito bom ter você como irmã.<br>
+Mesmo cada um seguindo seu caminho, o carinho continua.<br><br>
+
+Espero que sua vida seja cheia de conquistas, momentos felizes e muitas cores — assim como essa tela que você acabou de pintar.
+</p>
+
+<b>Com carinho, Michel ❤️</b>
+
+</div>
+
+</div>
+
+<script>
+
+let canvas = document.getElementById("tela");
+let ctx = canvas.getContext("2d");
+
+let desenhando=false;
+let corAtual="#ff595e";
+let pontos=0;
+
+function iniciar(){
+document.getElementById("inicio").style.display="none";
+document.getElementById("app").style.display="flex";
+}
+
+function mudarCor(cor){
+corAtual=cor;
+}
+
+canvas.addEventListener("mousedown",()=>desenhando=true);
+canvas.addEventListener("mouseup",()=>desenhando=false);
+
+canvas.addEventListener("mousemove",(e)=>{
+
+if(!desenhando) return;
+
+ctx.fillStyle=corAtual;
+
+ctx.beginPath();
+ctx.arc(e.offsetX,e.offsetY,6,0,Math.PI*2);
+ctx.fill();
+
+pontos++;
+
+if(pontos>120){
+document.getElementById("mensagem").style.display="block";
+}
+
+});
+
+</script>
+
+</body>
+</html>
